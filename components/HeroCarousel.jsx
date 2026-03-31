@@ -16,6 +16,7 @@ const SLIDES = [
     href: '/contact',
     href2: '/services',
     accent: '#3b82f6',
+    contain: true,
   },
   {
     id: 1,
@@ -84,7 +85,7 @@ export default function HeroCarousel() {
               fill
               priority={i === 0}
               sizes="100vw"
-              className="c-img"
+              className={`c-img${slide.contain ? ' c-img-contain' : ''}`}
             />
           </div>
 
