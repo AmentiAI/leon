@@ -57,16 +57,17 @@ export default function AboutPage() {
   return (
     <>
       {/* Page Hero with background image */}
-      <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg)' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', background: '#080c14' }}>
         <Image
           src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1600&q=80"
           alt="C&C Care mobile mechanic team"
           fill
           sizes="100vw"
-          style={{ objectFit: 'cover', opacity: 0.15 }}
+          style={{ objectFit: 'cover', opacity: 0.45 }}
           priority
         />
-        <div className="page-hero" style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,8,16,.55), rgba(6,8,16,.82))', zIndex: 0 }} />
+        <div className="page-hero page-hero-dark" style={{ position: 'relative', zIndex: 1 }}>
           <Link href="/" className="breadcrumb">← Home <span>/ About</span></Link>
           <h1>Meet the Team<br /><span className="gradient-text">Behind C&amp;C Care</span></h1>
           <p>A small business built on one principle — quality repair should come to you, not the other way around.</p>

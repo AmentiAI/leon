@@ -309,7 +309,7 @@
 .sic-img-label {
   position: absolute; bottom: .75rem; left: 1rem; z-index: 2;
   font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--accent3);
+  color: #fff;
   background: rgba(6,8,16,.6); border: 1px solid rgba(59,130,246,.3);
   padding: 3px 10px; border-radius: 100px; backdrop-filter: blur(8px);
 }
@@ -357,7 +357,7 @@
 .gallery-item:hover .gallery-overlay { opacity: 1; }
 
 .gallery-label { display: flex; flex-direction: column; gap: 2px; }
-.gallery-label-sub { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent3); }
+.gallery-label-sub { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(147,197,253,.9); }
 .gallery-label-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; color: #fff; }
 
 /* ==========================================
@@ -577,7 +577,7 @@
   padding: 3rem 4rem;
   z-index: 1;
 }
-.img-section-banner-overlay h2 { font-family: var(--font-head); font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .75rem; line-height: 1.15; }
+.img-section-banner-overlay h2 { font-family: var(--font-head); font-size: clamp(1.8rem,3.5vw,3rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .75rem; line-height: 1.15; color: #fff; }
 .img-section-banner-overlay p { color: rgba(241,245,249,.75); font-size: 1rem; line-height: 1.7; max-width: 480px; margin-bottom: 1.5rem; }
 
 /* ==========================================
@@ -605,8 +605,8 @@
   display: flex; align-items: center; gap: 1rem;
 }
 .story-photo-badge-icon { font-size: 1.8rem; }
-.story-photo-badge h4 { font-family: var(--font-head); font-size: .95rem; font-weight: 700; margin-bottom: 2px; }
-.story-photo-badge p { color: var(--muted); font-size: .8rem; }
+.story-photo-badge h4 { font-family: var(--font-head); font-size: .95rem; font-weight: 700; margin-bottom: 2px; color: #fff; }
+.story-photo-badge p { color: rgba(241,245,249,.75); font-size: .8rem; }
 
 /* ==========================================
    SCROLL PROGRESS COMPONENT

@@ -68,16 +68,17 @@ export default function ServicesPage() {
   return (
     <>
       {/* Page Hero with background image */}
-      <div style={{ position: 'relative', overflow: 'hidden', background: 'var(--bg)' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', background: '#080c14' }}>
         <Image
           src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80"
           alt="Auto and tech repair services"
           fill
           sizes="100vw"
-          style={{ objectFit: 'cover', opacity: 0.18 }}
+          style={{ objectFit: 'cover', opacity: 0.45 }}
           priority
         />
-        <div className="page-hero" style={{ position: 'relative', zIndex: 1 }}>
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(6,8,16,.55), rgba(6,8,16,.82))', zIndex: 0 }} />
+        <div className="page-hero page-hero-dark" style={{ position: 'relative', zIndex: 1 }}>
           <Link href="/" className="breadcrumb">← Home <span>/ Services</span></Link>
           <h1>All Our Services,<br /><span className="gradient-text">All at Your Location</span></h1>
           <p>Certified auto and tech repair — fully mobile, same-day available, priced fairly from the start.</p>
