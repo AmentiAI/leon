@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing | C&C Care</title>
+  <meta name="description" content="Transparent, upfront pricing for all C&C Care services. No hidden fees, no surprises — just honest rates for quality mobile repair." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* pricing cards */
+    .pricing-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto; }
+
+    .price-card {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:2rem;text-align:center;
+      position:relative;backdrop-filter:blur(10px);
+      transition:transform .3s,border-color .3s;
+    }
+    .price-card:hover { transform:translateY(-5px); }
+    .price-card.featured { border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.07);box-shadow:0 0 50px rgba(59,130,246,.15); }
+    .price-card.featured:hover { transform:translateY(-6px); }
+
+    .price-badge {
+      position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+      padding:4px 16px;border-radius:100px;white-space:nowrap;
+    }
+
+    .price-card h3 { font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:.4rem; }
+    .price-desc { color:var(--muted);font-size:.85rem;margin-bottom:1.5rem;line-height:1.5; }
+    .price-amount { font-family:'Space Grotesk',sans-serif;font-size:3rem;font-weight:800;line-height:1; }
+    .price-amount sup { font-size:1.2rem;vertical-align:super;font-weight:500;color:var(--muted); }
+    .price-amount sub { font-size:.9rem;vertical-align:baseline;font-weight:400;color:var(--muted); }
+    .price-note { color:var(--muted2);font-size:.78rem;margin:6px 0 1.75rem;display:block; }
+
+    .price-list { list-style:none;text-align:left;margin-bottom:1.75rem; }
+    .price-list li { display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.87rem;color:var(--muted);border-bottom:1px solid var(--border); }
+    .price-list li:last-child { border-bottom:none; }
+    .price-list li::before { content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px; }
+    .price-list li.cross::before { content:'✗';color:var(--muted2); }
+
+    .price-btn { display:block;width:100%;padding:.85rem;border-radius:10px;font-weight:600;font-size:.95rem;text-decoration:none;text-align:center;transition:all .2s; }
+    .price-btn-outline { border:1px solid var(--border2);color:var(--text); }
+    .price-btn-outline:hover { border-color:var(--accent);background:rgba(59,130,246,.08); }
+    .price-btn-solid { background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 20px rgba(59,130,246,.35); }
+    .price-btn-solid:hover { opacity:.9;transform:translateY(-1px); }
+
+    /* rate table */
+    .rate-table-wrap { max-width:900px;margin:0 auto;overflow-x:auto; }
+    .rate-table { width:100%;border-collapse:collapse; }
+    .rate-table th { text-align:left;padding:.9rem 1rem;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);background:var(--surface);border-bottom:2px solid var(--border2); }
+    .rate-table td { padding:.85rem 1rem;font-size:.9rem;color:var(--muted);border-bottom:1px solid var(--border);vertical-align:top; }
+    .rate-table tr:last-child td { border-bottom:none; }
+    .rate-table tr:hover td { background:var(--surface);color:var(--text); }
+    .rate-table td:first-child { color:var(--text);font-weight:500; }
+    .rate-table td .badge-sm { background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent);font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:100px; }
+    .rate-table td .badge-green { background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);color:var(--green);font-size:.7rem;font-weight:600;padding:2px 8px;border-radius:100px; }
+
+    /* guarantee strip */
+    .guarantee {
+      background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(34,211,238,.08));
+      border:1px solid rgba(16,185,129,.2);border-radius:var(--radius);
+      padding:2.5rem; max-width:900px; margin:3rem auto 0;
+      display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
+      backdrop-filter:blur(10px);
+    }
+    .guarantee .g-icon { font-size:3rem;flex-shrink:0; }
+    .guarantee h3 { font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:.4rem; }
+    .guarantee p { color:var(--muted);font-size:.9rem;line-height:1.65; }
+
+    /* comparison table */
+    .compare-wrap { max-width:1000px;margin:0 auto;overflow-x:auto; }
+    .compare-table { width:100%;border-collapse:collapse; }
+    .compare-table th { padding:1rem;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:600;text-align:center; }
+    .compare-table th:first-child { text-align:left; }
+    .compare-table th.highlight { color:var(--accent); }
+    .compare-table td { padding:.85rem 1rem;text-align:center;font-size:.88rem;border-bottom:1px solid var(--border);color:var(--muted); }
+    .compare-table td:first-child { text-align:left;color:var(--text);font-weight:500; }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .compare-table .check { color:var(--green);font-size:1.1rem; }
+    .compare-table .cross { color:var(--muted2);font-size:1rem; }
+    .compare-table .col-highlight { background:rgba(59,130,246,.05); }
+
+    @media(max-width:640px) {
+      .guarantee { flex-direction:column;text-align:center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <a href="index.html" class="breadcrumb">← Home <span>/ Pricing</span></a>
+    <h1>Simple, <span class="gradient-text">Honest Pricing</span></h1>
+    <p>No hidden fees. No bait-and-switch. Get a clear quote before we start — every single time.</p>
+  </div>
+
+  <!-- PLANS -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-tag">Service Plans</span>
+      <h2>Pick What Works For You</h2>
+      <p>Whether it's a one-time fix or ongoing care, we have a plan to fit your needs and budget.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <h3>Basic Fix</h3>
+        <p class="price-desc">Single-item repair or quick service. In, out, done.</p>
+        <div class="price-amount"><sup>$</sup>49<sub>+</sub></div>
+        <span class="price-note">Starting rate · Free on-site diagnosis</span>
+        <ul class="price-list">
+          <li>On-site diagnosis included</li>
+          <li>Single service item</li>
+          <li>Same-day availability</li>
+          <li>30-day labor warranty</li>
+          <li class="cross">Priority scheduling</li>
+          <li class="cross">Multi-device coverage</li>
+        </ul>
+        <a href="contact.html" class="price-btn price-btn-outline">Get a Quote</a>
+      </div>
+
+      <div class="price-card featured reveal">
+        <div class="price-badge">Most Popular</div>
+        <h3>Full Service</h3>
+        <p class="price-desc">Complete diagnosis, full repair, and post-service check.</p>
+        <div class="price-amount"><sup>$</sup>99<sub>+</sub></div>
+        <span class="price-note">Starting rate · All labor included</span>
+        <ul class="price-list">
+          <li>Full multi-point inspection</li>
+          <li>Complete repair service</li>
+          <li>Same-day availability</li>
+          <li>60-day labor warranty</li>
+          <li>Follow-up check-in call</li>
+          <li class="cross">Monthly coverage</li>
+        </ul>
+        <a href="contact.html" class="price-btn price-btn-solid">Book Now</a>
+      </div>
+
+      <div class="price-card reveal">
+        <h3>Care Plan</h3>
+        <p class="price-desc">Monthly membership for vehicle &amp; tech maintenance.</p>
+        <div class="price-amount"><sup>$</sup>79<sub>/mo</sub></div>
+        <span class="price-note">Billed monthly · Cancel anytime</span>
+        <ul class="price-list">
+          <li>Priority scheduling</li>
+          <li>Quarterly vehicle checkup</li>
+          <li>Quarterly PC/device checkup</li>
+          <li>10% off all repairs</li>
+          <li>1 free roadside call/month</li>
+          <li>Dedicated service contact</li>
+        </ul>
+        <a href="contact.html" class="price-btn price-btn-outline">Start Plan</a>
+      </div>
+    </div>
+
+    <div class="guarantee reveal">
+      <div class="g-icon">🛡️</div>
+      <div>
+        <h3>100% Satisfaction Guarantee</h3>
+        <p>If you're not completely satisfied with our work, we come back and make it right — at no extra charge. That's our promise on every single job, no exceptions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RATE TABLE - AUTO -->
+  <section class="bg2">
+    <div class="section-header reveal">
+      <span class="section-tag">Auto Services</span>
+      <h2>Automotive Pricing Guide</h2>
+      <p>Rates shown are labor only. Parts quoted separately. Final price confirmed before work begins.</p>
+    </div>
+
+    <div class="tab-bar reveal">
+      <button class="tab-btn active" data-tab="t-auto">🚗 Auto Rates</button>
+      <button class="tab-btn" data-tab="t-tech">💻 Tech Rates</button>
+    </div>
+
+    <div class="tab-panel active" id="t-auto">
+      <div class="rate-table-wrap">
+        <table class="rate-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Starting Price</th>
+              <th>Est. Time</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Conventional Oil Change</td><td>$49</td><td>30–45 min</td><td>Up to 5 qts · filter included</td></tr>
+            <tr><td>Synthetic Oil Change</td><td>$69</td><td>30–45 min</td><td>Full synthetic · filter included</td></tr>
+            <tr><td>Brake Pad Replacement (per axle)</td><td>$99</td><td>1–1.5 hrs</td><td>Labor only · pads extra</td></tr>
+            <tr><td>Rotor Replacement (per axle)</td><td>$119</td><td>1–2 hrs</td><td>Labor only · rotors extra</td></tr>
+            <tr><td>Battery Replacement</td><td>$59</td><td>20–30 min</td><td>Battery cost extra</td></tr>
+            <tr><td>Engine Diagnostic Scan</td><td>$75</td><td>30–60 min</td><td>Full written report included</td></tr>
+            <tr><td>Spark Plug Replacement (4-cyl)</td><td>$89</td><td>45–60 min</td><td>Plugs extra</td></tr>
+            <tr><td>Air/Cabin Filter Replacement</td><td>$29</td><td>15–20 min</td><td>Filters extra</td></tr>
+            <tr><td>Serpentine Belt Replacement</td><td>$99</td><td>45–90 min</td><td>Belt extra</td></tr>
+            <tr><td>Pre-Purchase Inspection</td><td>$99</td><td>60–90 min</td><td>150-point written report</td></tr>
+            <tr><td>Roadside Assistance</td><td>$49</td><td>On demand</td><td>Jump, flat, lockout, or fuel</td></tr>
+            <tr><td>Coolant Flush</td><td>$79</td><td>45–60 min</td><td>Coolant extra</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="t-tech">
+      <div class="rate-table-wrap">
+        <table class="rate-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Starting Price</th>
+              <th>Est. Time</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Laptop Screen Replacement</td><td>$89</td><td>1–2 hrs</td><td>Screen cost extra</td></tr>
+            <tr><td>Virus / Malware Removal</td><td>$89</td><td>1–3 hrs</td><td>Includes security setup</td></tr>
+            <tr><td>HDD to SSD Upgrade</td><td>$69</td><td>1–2 hrs</td><td>SSD cost extra · data transfer incl.</td></tr>
+            <tr><td>RAM Upgrade</td><td>$49</td><td>30–45 min</td><td>RAM cost extra</td></tr>
+            <tr><td>OS Reinstall (Windows/Mac)</td><td>$79</td><td>2–3 hrs</td><td>Includes driver setup</td></tr>
+            <tr><td>Data Recovery</td><td>$99</td><td>Varies</td><td>Price depends on severity</td></tr>
+            <tr><td>Phone Screen Replacement</td><td>$59</td><td>45–90 min</td><td>Screen cost extra</td></tr>
+            <tr><td>Phone Battery Replacement</td><td>$49</td><td>30–45 min</td><td>Battery cost extra</td></tr>
+            <tr><td>Charging Port Repair</td><td>$59</td><td>45–60 min</td><td>Parts extra if needed</td></tr>
+            <tr><td>Wi-Fi Network Setup</td><td>$69</td><td>1–2 hrs</td><td>Router/hardware extra</td></tr>
+            <tr><td>Computer Tune-Up</td><td>$59</td><td>1–2 hrs</td><td>Cleanup, optimization, update</td></tr>
+            <tr><td>Home Tech Setup</td><td>$59</td><td>1–2 hrs</td><td>TV, printer, smart home devices</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p style="text-align:center;color:var(--muted2);font-size:.8rem;margin-top:1.5rem;">
+      All prices are starting labor rates. Parts and materials are quoted separately and confirmed before any work begins.
+    </p>
+  </section>
+
+  <!-- COMPARISON -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-tag">Value Comparison</span>
+      <h2>C&amp;C Care vs. The Shop</h2>
+      <p>See why more people are choosing mobile service over the traditional repair shop experience.</p>
+    </div>
+
+    <div class="compare-wrap reveal">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:35%"></th>
+            <th class="highlight">C&amp;C Care</th>
+            <th>Dealership</th>
+            <th>Big Box Shop</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>We come to you</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Same-day availability</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td>Sometimes</td>
+          </tr>
+          <tr>
+            <td>Upfront pricing before work</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td>Rarely</td>
+            <td>Sometimes</td>
+          </tr>
+          <tr>
+            <td>No shop markup on parts</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Handles auto AND tech repair</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Satisfaction guarantee</td>
+            <td class="col-highlight"><span class="check">✓</span></td>
+            <td>Limited</td>
+            <td>Limited</td>
+          </tr>
+          <tr>
+            <td>Typical wait time</td>
+            <td class="col-highlight" style="color:var(--green);font-weight:600">Under 2 hrs</td>
+            <td style="color:var(--muted)">Days</td>
+            <td style="color:var(--muted)">Hours–Days</td>
+          </tr>
+          <tr>
+            <td>Average cost savings</td>
+            <td class="col-highlight" style="color:var(--green);font-weight:600">Save 20–40%</td>
+            <td style="color:var(--red)">Most expensive</td>
+            <td style="color:var(--muted)">Moderate</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2 class="reveal">Ready for a Free Quote?</h2>
+    <p class="reveal">Tell us what you need and we'll give you an honest price — no obligation, no pressure.</p>
+    <div class="reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn-primary">📅 Get a Free Quote</a>
+      <a href="services.html" class="btn-ghost">Browse Services</a>
+    </div>
+    <div class="contact-chips reveal">
+      <a href="tel:+15551234567" class="chip">📞 (555) 123-4567</a>
+      <a href="mailto:hello@cnccare.com" class="chip">✉️ hello@cnccare.com</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+        <p>Professional mobile mechanic and computer/electronics repair. Fair prices, quality work, your location.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">g</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Mobile Mechanic</a></li>
+        <li><a href="services.html">Computer Repair</a></li>
+        <li><a href="services.html">Phone Repair</a></li>
+        <li><a href="services.html">Roadside Assist</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+        <li><a href="mailto:hello@cnccare.com">hello@cnccare.com</a></li>
+        <li><a href="contact.html">Book Online</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 C&amp;C Care. All rights reserved.</p>
+      <p>Transparent pricing · No hidden fees</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | C&C Care</title>
+  <meta name="description" content="Learn about C&C Care — our story, mission, values, and the team behind your mobile mechanic and tech repair service." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* story section */
+    .story-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      max-width: 1100px; margin: 0 auto; align-items: center;
+    }
+    .story-content h2 { font-family:'Space Grotesk',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.15;margin-bottom:1.5rem; }
+    .story-content p { color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:1.2rem; }
+    .story-content strong { color:var(--text); }
+    .story-content blockquote {
+      border-left:3px solid var(--accent);padding-left:1.25rem;
+      font-style:italic;color:var(--muted);font-size:.95rem;line-height:1.7;margin:1.5rem 0;
+    }
+
+    .story-visual {
+      position: relative;
+    }
+    .story-img-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .story-img-box::before {
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(99,102,241,.08));
+    }
+    .big-emoji { font-size:5rem;display:block;margin-bottom:1rem;position:relative;z-index:1; }
+    .story-img-box h3 { font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;position:relative;z-index:1;margin-bottom:.5rem; }
+    .story-img-box p { color:var(--muted);font-size:.9rem;position:relative;z-index:1; }
+
+    .mini-stats {
+      display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;position:relative;z-index:1;
+    }
+    .mini-stat {
+      background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:1rem;text-align:center;
+    }
+    .mini-stat .n { font-family:'Space Grotesk',sans-serif;font-size:1.6rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .mini-stat .l { color:var(--muted);font-size:.75rem;margin-top:2px; }
+
+    /* values */
+    .values-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto; }
+    .value-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s; }
+    .value-card:hover { border-color:rgba(59,130,246,.35);transform:translateY(-4px); }
+    .value-card .v-icon { font-size:2rem;margin-bottom:1rem;display:block; }
+    .value-card h3 { font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:.5rem; }
+    .value-card p { color:var(--muted);font-size:.87rem;line-height:1.65; }
+
+    /* team */
+    .team-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;max-width:1000px;margin:0 auto; }
+    .team-card { background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;text-align:center;backdrop-filter:blur(10px);transition:border-color .3s,transform .3s; }
+    .team-card:hover { border-color:rgba(59,130,246,.35);transform:translateY(-4px); }
+    .team-avatar {
+      width:90px;height:90px;border-radius:50%;margin:0 auto 1.25rem;
+      display:flex;align-items:center;justify-content:center;font-size:2.5rem;
+      border:3px solid var(--border2);
+    }
+    .team-card h3 { font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:.25rem; }
+    .team-role { color:var(--accent);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.75rem; }
+    .team-card p { color:var(--muted);font-size:.87rem;line-height:1.6; }
+    .cert-badges { display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center;margin-top:1rem; }
+    .cert { background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);color:var(--accent);font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:100px; }
+
+    /* certifications */
+    .certs-row { display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;max-width:800px;margin:0 auto; }
+    .cert-chip {
+      display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-sm);padding:.9rem 1.25rem;backdrop-filter:blur(10px);
+      transition:border-color .2s;flex:1;min-width:200px;
+    }
+    .cert-chip:hover { border-color:rgba(59,130,246,.35); }
+    .cert-chip .c-icon { font-size:1.5rem;flex-shrink:0; }
+    .cert-chip h4 { font-size:.9rem;font-weight:600;margin-bottom:2px; }
+    .cert-chip p { color:var(--muted);font-size:.78rem; }
+
+    @media(max-width:768px) {
+      .story-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <a href="index.html" class="breadcrumb">← Home <span>/ About</span></a>
+    <h1>The Story Behind <span class="gradient-text">C&amp;C Care</span></h1>
+    <p>A small business built on a simple idea — quality service should come to you, not the other way around.</p>
+  </div>
+
+  <!-- STORY -->
+  <section>
+    <div class="story-grid">
+      <div class="story-content reveal">
+        <span class="section-tag">Our Story</span>
+        <h2>Born From Frustration.<br />Built With Purpose.</h2>
+        <p>C&amp;C Care started when our founder got stranded with a dead battery and was quoted <strong>$400 just to tow the car</strong> to a shop that couldn't even see them until the next day. There had to be a better way.</p>
+        <p>We built C&amp;C Care on the belief that <strong>skilled, honest service should come to you</strong> — not the other way around. By cutting out the shop overhead, we can offer dealer-quality work at a fraction of the price, while giving you back your time.</p>
+        <p>We expanded beyond auto repair because we kept meeting the same people at broken laptops and cracked phone screens with no good options. So we added tech repair — same philosophy, same commitment, same person showing up at your door.</p>
+        <blockquote>"We're not just fixing cars and computers. We're fixing the experience of getting things fixed."</blockquote>
+        <p>Today C&amp;C Care serves hundreds of clients across the area, with the same dedication to doing the job right the first time, at a fair price, with zero runaround.</p>
+      </div>
+      <div class="story-visual reveal">
+        <div class="story-img-box">
+          <span class="big-emoji">🔧</span>
+          <h3>C&amp;C Care</h3>
+          <p>Mobile Mechanic &amp; Tech Repair</p>
+          <div class="mini-stats">
+            <div class="mini-stat"><div class="n" data-target="500" data-suffix="+">500+</div><div class="l">Jobs Done</div></div>
+            <div class="mini-stat"><div class="n" data-target="5" data-suffix="★">5★</div><div class="l">Rating</div></div>
+            <div class="mini-stat"><div class="n" data-target="3" data-suffix="+ yrs">3+ yrs</div><div class="l">In Business</div></div>
+            <div class="mini-stat"><div class="n" data-target="98" data-suffix="%">98%</div><div class="l">Satisfaction</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="bg2">
+    <div class="section-header reveal">
+      <span class="section-tag">What We Stand For</span>
+      <h2>Our Core Values</h2>
+      <p>Every job we take, every client we serve — these are the principles we operate by.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="v-icon">🤝</span>
+        <h3>Honesty First</h3>
+        <p>We tell you what you need — not what pads our bill. No unnecessary repairs, no upselling, ever. If it doesn't need to be fixed, we'll tell you.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="v-icon">⚡</span>
+        <h3>Respect Your Time</h3>
+        <p>We show up on time, work efficiently, and communicate clearly. You shouldn't have to rearrange your life for a repair.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="v-icon">🎯</span>
+        <h3>Done Right, First Time</h3>
+        <p>We take pride in quality. If a repair isn't done right, we come back and fix it — no questions asked, at no extra charge.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="v-icon">💸</span>
+        <h3>Fair Pricing Always</h3>
+        <p>Transparent quotes before we start. No hidden fees, no surprise invoices. You know exactly what you're paying and why.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="v-icon">🌱</span>
+        <h3>Community Focused</h3>
+        <p>We're a local business serving our neighbors. We reinvest in the community and offer discounts for seniors and veterans.</p>
+      </div>
+      <div class="value-card reveal">
+        <span class="v-icon">🔒</span>
+        <h3>Your Privacy Matters</h3>
+        <p>When we work on your tech, your data is yours. We never access personal files unnecessarily and treat every device with respect.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-tag">The Team</span>
+      <h2>The People Behind C&amp;C Care</h2>
+      <p>Small team, big expertise. Every technician is trained, certified, and passionate about doing the job right.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background:rgba(59,130,246,.15);">👨‍🔧</div>
+        <h3>Chris Carter</h3>
+        <div class="team-role">Founder &amp; Lead Mechanic</div>
+        <p>10+ years in automotive repair. Former dealership technician who left the shop life to build something better — faster, more honest, and mobile.</p>
+        <div class="cert-badges">
+          <span class="cert">ASE Certified</span>
+          <span class="cert">OBD-II Specialist</span>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background:rgba(99,102,241,.15);">👩‍💻</div>
+        <h3>Casey Monroe</h3>
+        <div class="team-role">Lead Tech Repair Specialist</div>
+        <p>CompTIA-certified tech with 8 years fixing computers and electronics. She can fix what the big-box stores say is unfixable.</p>
+        <div class="cert-badges">
+          <span class="cert">CompTIA A+</span>
+          <span class="cert">Apple Certified</span>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar" style="background:rgba(16,185,129,.15);">👨‍💻</div>
+        <h3>Jordan Ellis</h3>
+        <div class="team-role">Mobile Technician</div>
+        <p>Handles auto and tech with equal skill. Jordan specializes in roadside assistance and same-day emergency repairs.</p>
+        <div class="cert-badges">
+          <span class="cert">ASE Certified</span>
+          <span class="cert">Network+</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="bg2">
+    <div class="section-header reveal">
+      <span class="section-tag">Credentials</span>
+      <h2>Trained, Certified &amp; Insured</h2>
+      <p>You can trust who's working on your property. Our technicians hold industry-recognized certifications.</p>
+    </div>
+    <div class="certs-row">
+      <div class="cert-chip reveal">
+        <span class="c-icon">🏆</span>
+        <div><h4>ASE Certified</h4><p>National Institute for Automotive Service Excellence</p></div>
+      </div>
+      <div class="cert-chip reveal">
+        <span class="c-icon">💻</span>
+        <div><h4>CompTIA A+</h4><p>Industry-standard IT technician certification</p></div>
+      </div>
+      <div class="cert-chip reveal">
+        <span class="c-icon">🍎</span>
+        <div><h4>Apple Certified</h4><p>Authorized repair training for Apple devices</p></div>
+      </div>
+      <div class="cert-chip reveal">
+        <span class="c-icon">🛡️</span>
+        <div><h4>Fully Insured</h4><p>General liability &amp; professional coverage on every job</p></div>
+      </div>
+      <div class="cert-chip reveal">
+        <span class="c-icon">📋</span>
+        <div><h4>Background Checked</h4><p>All technicians pass full background screenings</p></div>
+      </div>
+      <div class="cert-chip reveal">
+        <span class="c-icon">🌐</span>
+        <div><h4>CompTIA Network+</h4><p>Certified networking and Wi-Fi expertise</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section>
+    <div class="section-header reveal">
+      <span class="section-tag">By The Numbers</span>
+      <h2>Built On Results</h2>
+    </div>
+    <div class="stat-row">
+      <div class="stat-chip reveal"><div class="num" data-target="500" data-suffix="+">500+</div><div class="lbl">Jobs Completed</div></div>
+      <div class="stat-chip reveal"><div class="num" data-target="98" data-suffix="%">98%</div><div class="lbl">Satisfaction Rate</div></div>
+      <div class="stat-chip reveal"><div class="num" data-target="3" data-suffix="+ Years">3+ Years</div><div class="lbl">In Business</div></div>
+      <div class="stat-chip reveal"><div class="num" data-target="2" data-suffix=" Hrs Avg">2 Hrs</div><div class="lbl">Same-Day Response</div></div>
+      <div class="stat-chip reveal"><div class="num">5★</div><div class="lbl">Average Rating</div></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2 class="reveal">Let's Get To Work</h2>
+    <p class="reveal">Book your service today and experience the C&amp;C Care difference — honest, skilled, at your door.</p>
+    <div class="reveal" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn-primary">📅 Book a Service</a>
+      <a href="services.html" class="btn-ghost">View All Services</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+        <p>Professional mobile mechanic and computer/electronics repair. We bring the expertise to your door.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">g</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Mobile Mechanic</a></li>
+        <li><a href="services.html">Computer Repair</a></li>
+        <li><a href="services.html">Phone Repair</a></li>
+        <li><a href="services.html">Roadside Assist</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+        <li><a href="mailto:hello@cnccare.com">hello@cnccare.com</a></li>
+        <li><a href="contact.html">Book Online</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 C&amp;C Care. All rights reserved.</p>
+      <p>Honest work · Fair prices · Your location</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

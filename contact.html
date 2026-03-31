@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Book | C&C Care</title>
+  <meta name="description" content="Book a mobile mechanic or tech repair service with C&C Care. Fast response, on-site service, honest pricing." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* contact layout */
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem;
+      max-width: 1100px; margin: 0 auto; align-items: start;
+    }
+
+    /* info panel */
+    .info-panel h2 { font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;letter-spacing:-.03em;margin-bottom:1rem; }
+    .info-panel p { color:var(--muted);font-size:.93rem;line-height:1.75;margin-bottom:2rem; }
+
+    .detail-item {
+      display:flex;gap:14px;align-items:flex-start;
+      padding:1.1rem 0;border-bottom:1px solid var(--border);
+    }
+    .detail-item:last-of-type { border-bottom:none; }
+    .d-icon { width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0; }
+    .detail-item h4 { font-size:.9rem;font-weight:600;margin-bottom:3px; }
+    .detail-item p { color:var(--muted);font-size:.83rem;margin-bottom:0; }
+    .detail-item a { color:var(--accent);text-decoration:none;font-size:.9rem;font-weight:500; }
+    .detail-item a:hover { text-decoration:underline; }
+
+    /* hours */
+    .hours-table { width:100%;border-collapse:collapse;margin-top:2rem; }
+    .hours-table th { text-align:left;padding:.6rem .5rem;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted2);border-bottom:1px solid var(--border); }
+    .hours-table td { padding:.65rem .5rem;font-size:.88rem;border-bottom:1px solid var(--border); }
+    .hours-table tr:last-child td { border-bottom:none; }
+    .hours-table td:last-child { color:var(--muted);text-align:right; }
+    .hours-table .today td { color:var(--text);font-weight:600; }
+    .hours-table .today td:last-child { color:var(--green); }
+    .open-now { display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:.78rem;font-weight:600;margin-top:.75rem; }
+    .open-now::before { content:'';width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 8px var(--green);animation:pulse 2s infinite; }
+
+    /* form panel */
+    .form-panel {
+      background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius);padding:2.5rem;backdrop-filter:blur(10px);
+    }
+    .form-panel h3 { font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:.35rem; }
+    .form-panel .sub { color:var(--muted);font-size:.88rem;margin-bottom:2rem; }
+
+    /* service checkboxes */
+    .service-checks { display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.5rem; }
+    .check-item { display:flex;align-items:center;gap:8px;cursor:pointer; }
+    .check-item input[type="checkbox"] { width:16px;height:16px;accent-color:var(--accent);cursor:pointer; }
+    .check-item span { font-size:.85rem;color:var(--muted); }
+
+    /* success message */
+    .success-msg {
+      display:none;text-align:center;padding:3rem 2rem;
+    }
+    .success-msg .s-icon { font-size:3.5rem;margin-bottom:1rem;display:block; }
+    .success-msg h3 { font-family:'Space Grotesk',sans-serif;font-size:1.4rem;font-weight:700;margin-bottom:.5rem;color:var(--green); }
+    .success-msg p { color:var(--muted);font-size:.9rem;line-height:1.7; }
+
+    /* quick contact strip */
+    .quick-strip {
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1rem;max-width:900px;margin:0 auto;
+    }
+    .quick-card {
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+      padding:1.5rem;text-align:center;backdrop-filter:blur(10px);
+      text-decoration:none;transition:border-color .2s,transform .2s;display:block;
+    }
+    .quick-card:hover { border-color:var(--accent);transform:translateY(-3px); }
+    .quick-card .q-icon { font-size:1.8rem;display:block;margin-bottom:.75rem; }
+    .quick-card h4 { font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;margin-bottom:.3rem;color:var(--text); }
+    .quick-card p { color:var(--muted);font-size:.82rem; }
+
+    /* FAQ */
+    .faq-wrap { max-width:700px;margin:0 auto; }
+
+    @media(max-width:900px) {
+      .contact-grid { grid-template-columns:1fr; }
+    }
+    @media(max-width:640px) {
+      .service-checks { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html" class="nav-cta">Book Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <div class="page-hero">
+    <a href="index.html" class="breadcrumb">← Home <span>/ Contact</span></a>
+    <h1>Let's Get You <span class="gradient-text">Taken Care Of</span></h1>
+    <p>Book a service, ask a question, or request a quote. We respond fast — usually within the hour.</p>
+  </div>
+
+  <!-- QUICK CONTACT -->
+  <section>
+    <div class="quick-strip">
+      <a href="tel:+15551234567" class="quick-card reveal">
+        <span class="q-icon">📞</span>
+        <h4>Call Us</h4>
+        <p>(555) 123-4567<br/>Mon–Sat 7am–8pm</p>
+      </a>
+      <a href="mailto:hello@cnccare.com" class="quick-card reveal">
+        <span class="q-icon">✉️</span>
+        <h4>Email Us</h4>
+        <p>hello@cnccare.com<br/>Reply within 1 hour</p>
+      </a>
+      <a href="sms:+15551234567" class="quick-card reveal">
+        <span class="q-icon">💬</span>
+        <h4>Text Us</h4>
+        <p>(555) 123-4567<br/>Fastest response</p>
+      </a>
+      <div class="quick-card reveal" style="cursor:default;">
+        <span class="q-icon">📍</span>
+        <h4>Service Area</h4>
+        <p>Mobile — we come to you<br/>Call to confirm your area</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTACT SECTION -->
+  <section class="bg2">
+    <div class="contact-grid">
+
+      <!-- INFO -->
+      <div class="info-panel reveal">
+        <span class="section-tag">Get In Touch</span>
+        <h2>We're Ready<br/>When You Are</h2>
+        <p>Fill out the form and we'll confirm your appointment — usually within the hour. Same-day service available when you book before noon.</p>
+
+        <div class="detail-item">
+          <div class="d-icon icon-blue">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <a href="tel:+15551234567">(555) 123-4567</a>
+            <p>Call or text for fastest response</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="d-icon icon-purple">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <a href="mailto:hello@cnccare.com">hello@cnccare.com</a>
+            <p>We reply within 1 hour during hours</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="d-icon icon-green">📍</div>
+          <div>
+            <h4>Service Area</h4>
+            <p>Mobile service — we come to your home, office, or any location. Call to confirm your area is covered.</p>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="d-icon icon-orange">⚡</div>
+          <div>
+            <h4>Emergency Roadside</h4>
+            <a href="tel:+15551234567">Call (555) 123-4567</a>
+            <p>Stranded? We dispatch ASAP.</p>
+          </div>
+        </div>
+
+        <!-- HOURS -->
+        <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-top:2rem;margin-bottom:.5rem;">Business Hours</h3>
+        <table class="hours-table">
+          <thead><tr><th>Day</th><th>Hours</th></tr></thead>
+          <tbody>
+            <tr><td>Monday</td><td>7:00 AM – 8:00 PM</td></tr>
+            <tr><td>Tuesday</td><td>7:00 AM – 8:00 PM</td></tr>
+            <tr><td>Wednesday</td><td>7:00 AM – 8:00 PM</td></tr>
+            <tr><td>Thursday</td><td>7:00 AM – 8:00 PM</td></tr>
+            <tr><td>Friday</td><td>7:00 AM – 8:00 PM</td></tr>
+            <tr><td>Saturday</td><td>8:00 AM – 6:00 PM</td></tr>
+            <tr><td>Sunday</td><td>9:00 AM – 5:00 PM</td></tr>
+          </tbody>
+        </table>
+        <div class="open-now" id="openNow">Checking hours…</div>
+      </div>
+
+      <!-- FORM -->
+      <div class="form-panel reveal">
+        <h3>Book a Service</h3>
+        <p class="sub">Tell us what you need and we'll take it from there. Free diagnosis on every booking.</p>
+
+        <form id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" placeholder="Smith" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" placeholder="(555) 000-0000" required />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Your Address / Location *</label>
+            <input type="text" placeholder="123 Main St, City, State" required />
+          </div>
+
+          <div class="form-group">
+            <label>Service Type *</label>
+            <select required>
+              <option value="">Select a category…</option>
+              <optgroup label="🚗 Auto Services">
+                <option>Oil Change / Fluid Service</option>
+                <option>Brake Inspection or Replacement</option>
+                <option>Battery Test or Replacement</option>
+                <option>Engine Diagnostic / Check Engine Light</option>
+                <option>Tune-Up / Spark Plugs / Filters</option>
+                <option>Belts &amp; Hoses</option>
+                <option>Pre-Purchase Vehicle Inspection</option>
+                <option>Roadside Assistance (Stranded)</option>
+                <option>General Auto Repair (Describe Below)</option>
+              </optgroup>
+              <optgroup label="💻 Tech Services">
+                <option>Laptop or Desktop Repair</option>
+                <option>Virus / Malware Removal</option>
+                <option>SSD Upgrade or RAM Upgrade</option>
+                <option>OS Reinstall / Software Setup</option>
+                <option>Data Recovery</option>
+                <option>Phone Screen or Battery Repair</option>
+                <option>Charging Port or Other Phone Repair</option>
+                <option>Wi-Fi Network Setup</option>
+                <option>Home Tech Setup / Smart Devices</option>
+                <option>Game Console Repair</option>
+              </optgroup>
+              <option>Monthly Care Plan Inquiry</option>
+              <option>Other / Not Sure — Describe Below</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Date</label>
+              <input type="date" />
+            </div>
+            <div class="form-group">
+              <label>Preferred Time</label>
+              <select>
+                <option value="">Any time</option>
+                <option>Morning (7am–12pm)</option>
+                <option>Afternoon (12pm–5pm)</option>
+                <option>Evening (5pm–8pm)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>How Urgent Is This?</label>
+            <select>
+              <option>Not urgent — schedule when available</option>
+              <option>Soon — within the next few days</option>
+              <option>Urgent — today or tomorrow if possible</option>
+              <option>Emergency — I need help right now</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Describe the Problem</label>
+            <textarea placeholder="Tell us what's happening — any symptoms, error messages, noises, what you've already tried, etc. The more detail, the better!"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>How Did You Hear About Us?</label>
+            <select>
+              <option value="">Select one…</option>
+              <option>Google Search</option>
+              <option>Facebook</option>
+              <option>Instagram</option>
+              <option>Word of Mouth / Referral</option>
+              <option>Nextdoor</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="form-submit" id="submitBtn">Send Booking Request →</button>
+          <p style="color:var(--muted2);font-size:.75rem;text-align:center;margin-top:.75rem;">
+            We'll confirm your appointment by phone or email within 1 hour.
+          </p>
+        </form>
+
+        <div class="success-msg" id="successMsg">
+          <span class="s-icon">✅</span>
+          <h3>Request Received!</h3>
+          <p>We got your booking request and will reach out to confirm your appointment within the hour. If it's urgent, give us a call at <a href="tel:+15551234567" style="color:var(--accent)">(555) 123-4567</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="section-header reveal">
+      <span class="section-tag">FAQ</span>
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know before booking. Still have questions? Just call or text us.</p>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="faq-item reveal">
+        <div class="faq-q">How far in advance do I need to book? <span class="arrow">▼</span></div>
+        <div class="faq-a">For same-day service, book before noon and we'll do our best to get to you that day. For scheduled appointments, 24–48 hours notice is ideal. Emergency roadside? Call us right now — no booking needed.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do you charge for the diagnosis? <span class="arrow">▼</span></div>
+        <div class="faq-a">On-site diagnosis is free with every booked service. We assess the problem, tell you exactly what needs to be done and the cost, and you decide whether to proceed — with zero pressure.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What areas do you serve? <span class="arrow">▼</span></div>
+        <div class="faq-a">We serve a growing service area — give us a call at (555) 123-4567 or drop your address in the booking form and we'll confirm whether we cover your location. We're expanding regularly!</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Do I need to be home for the service? <span class="arrow">▼</span></div>
+        <div class="faq-a">For auto repairs, you just need to be present at the vehicle. For computer/tech repair, we prefer you're available to answer any questions, but for some jobs we can work independently. We'll coordinate with you beforehand.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">How do you handle parts and materials? <span class="arrow">▼</span></div>
+        <div class="faq-a">We quote labor and parts separately. For common parts like oil filters, batteries, or brake pads, we can often bring them on the first visit. For specialty parts, we may need to order them — we'll always confirm the cost with you before any purchase.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What payment methods do you accept? <span class="arrow">▼</span></div>
+        <div class="faq-a">We accept cash, all major credit/debit cards, Venmo, CashApp, and Zelle. Payment is due upon completion of the service. We never ask for full payment upfront.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is my data safe when you repair my computer? <span class="arrow">▼</span></div>
+        <div class="faq-a">Absolutely. We never access your personal files unless it's directly required for the repair (e.g., data recovery). We recommend backing up your data before any repair as a precaution. We take privacy seriously and can sign a confidentiality agreement upon request.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">What if the repair doesn't fix the problem? <span class="arrow">▼</span></div>
+        <div class="faq-a">We stand behind our work with a satisfaction guarantee. If the repair doesn't resolve the issue, we come back and make it right at no additional labor charge. We want you to be fully satisfied — always.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2 class="reveal">Still Have Questions?</h2>
+    <p class="reveal">Call or text us — we're friendly, we don't bite, and there's no such thing as a dumb question.</p>
+    <div class="contact-chips reveal">
+      <a href="tel:+15551234567" class="chip">📞 Call (555) 123-4567</a>
+      <a href="sms:+15551234567" class="chip">💬 Text Us</a>
+      <a href="mailto:hello@cnccare.com" class="chip">✉️ Email Us</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span class="logo-icon">🔧</span>C&amp;C Care</a>
+        <p>Professional mobile mechanic and computer/electronics repair. We bring the expertise to your door.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">f</a>
+          <a href="#" class="social-btn">in</a>
+          <a href="#" class="social-btn">g</a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html">Mobile Mechanic</a></li>
+        <li><a href="services.html">Computer Repair</a></li>
+        <li><a href="services.html">Phone Repair</a></li>
+        <li><a href="services.html">Roadside Assist</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="contact.html#faq">FAQ</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Emergency</h4><ul>
+        <li><a href="tel:+15551234567">📞 (555) 123-4567</a></li>
+        <li><a href="sms:+15551234567">💬 Text Us</a></li>
+        <li><a href="mailto:hello@cnccare.com">✉️ Email</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 C&amp;C Care. All rights reserved.</p>
+      <p>Available 7 days a week · We come to you</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Open/closed status
+    (function() {
+      const now = new Date();
+      const day = now.getDay(); // 0=Sun,6=Sat
+      const hour = now.getHours() + now.getMinutes() / 60;
+      let open = false;
+      if (day >= 1 && day <= 5) open = hour >= 7 && hour < 20;
+      else if (day === 6)       open = hour >= 8 && hour < 18;
+      else                      open = hour >= 9 && hour < 17;
+      const el = document.getElementById('openNow');
+      if (el) el.textContent = open ? 'Open now' : 'Currently closed';
+      if (el) el.style.color = open ? 'var(--green)' : 'var(--red)';
+
+      // highlight today row
+      const rows = document.querySelectorAll('.hours-table tbody tr');
+      // Mon=1→idx0, Tue=2→idx1 … Sun=0→idx6
+      const idx = day === 0 ? 6 : day - 1;
+      if (rows[idx]) rows[idx].classList.add('today');
+    })();
+
+    // Enhanced form submit
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      setTimeout(() => {
+        this.style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

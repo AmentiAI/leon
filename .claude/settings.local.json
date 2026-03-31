@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(wait)",
+      "Bash(npx next:*)",
+      "WebFetch(domain:unsplash.com)",
+      "WebSearch",
+      "Bash(npm run:*)",
+      "Read(//mnt/c/Users/Wilso/Downloads/leonfavicon/**)",
+      "Read(//mnt/c/Users/Wilso/Downloads/**)",
+      "Bash(find /mnt/c/Users/Wilso/Downloads -maxdepth 2 -iname *leon* -o -iname *favicon*)",
+      "Bash(cp \"/mnt/c/Users/Wilso/Downloads/leonfavicon/ChatGPT Image Mar 30, 2026, 05_16_35 PM.png\" \"/mnt/c/Users/Wilso/leon/app/icon.png\")",
+      "Bash(cp \"/mnt/c/Users/Wilso/Downloads/leonfavicon/ChatGPT Image Mar 30, 2026, 05_16_35 PM.png\" \"/mnt/c/Users/Wilso/leon/public/logo.png\")"
+    ]
+  }
+}
