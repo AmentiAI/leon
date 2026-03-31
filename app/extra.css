@@ -87,10 +87,9 @@
   margin: 0;
 }
 
-/* Split overlay — heavier on right so text stays readable, lighter on left for logo */
+/* Slide 1 overlay — only darkens the right half where text sits, leaves logo clean */
 .c-overlay-split {
-  background:
-    linear-gradient(to left, rgba(6,8,16,.92) 0%, rgba(6,8,16,.55) 50%, rgba(6,8,16,.15) 100%);
+  background: linear-gradient(to left, rgba(6,8,16,.92) 0%, rgba(6,8,16,.75) 35%, transparent 58%);
 }
 
 /* Tag pill */
