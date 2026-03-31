@@ -22,6 +22,18 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata = {
   title: 'C&C Car & CPU Repair | Mobile Mechanic & Tech Repair',
   description: 'C&C Car & CPU Repair — Certified mobile mechanic and computer/electronics repair. We come to you. Same-day service, upfront pricing, satisfaction guaranteed.',
+  openGraph: {
+    title: 'C&C Car & CPU Repair | Mobile Mechanic & Tech Repair',
+    description: 'Certified mobile mechanic and computer/electronics repair. We come to you. Same-day service, upfront pricing, satisfaction guaranteed.',
+    images: [{ url: '/logo.png', width: 600, height: 600, alt: 'C&C Car & CPU Repair' }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'C&C Car & CPU Repair | Mobile Mechanic & Tech Repair',
+    description: 'Certified mobile mechanic and computer/electronics repair. Same-day service, upfront pricing.',
+    images: ['/logo.png'],
+  },
 }
 
 export default function RootLayout({ children }) {
