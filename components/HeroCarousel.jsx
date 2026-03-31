@@ -86,11 +86,12 @@ export default function HeroCarousel() {
               priority={i === 0}
               sizes="100vw"
               className={`c-img${slide.contain ? ' c-img-contain' : ''}`}
+              style={slide.contain ? { objectPosition: '25% center' } : undefined}
             />
           </div>
 
           {/* Dark gradient overlay */}
-          <div className="c-overlay" />
+          <div className={slide.contain ? 'c-overlay c-overlay-split' : 'c-overlay'} />
 
           {/* Accent color haze */}
           <div
@@ -99,7 +100,7 @@ export default function HeroCarousel() {
           />
 
           {/* Slide content */}
-          <div className="c-content">
+          <div className={slide.contain ? 'c-content c-content-right' : 'c-content'}>
             <div className="c-tag">
               <span className="c-tag-dot" />
               {slide.tag}

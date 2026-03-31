@@ -61,6 +61,21 @@
   margin: 0 auto;
 }
 
+/* Slide 1: text pinned to right half */
+.c-content-right {
+  left: auto; right: 0; bottom: 50%;
+  transform: translateY(50%);
+  width: 48%; max-width: none;
+  padding: 0 5vw 0 2vw;
+  margin: 0;
+}
+
+/* Split overlay — heavier on right so text stays readable, lighter on left for logo */
+.c-overlay-split {
+  background:
+    linear-gradient(to left, rgba(6,8,16,.92) 0%, rgba(6,8,16,.55) 50%, rgba(6,8,16,.15) 100%);
+}
+
 /* Tag pill */
 .c-tag {
   display: inline-flex; align-items: center; gap: 8px;
@@ -607,6 +622,7 @@
 
 @media (max-width: 768px) {
   .c-content { padding: 0 5vw 110px; }
+  .c-content-right { left: 0; right: 0; width: 100%; bottom: 0; transform: none; padding: 0 5vw 110px; }
   .c-h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
   .c-arrow { display: none; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(5, 180px); }
