@@ -27,7 +27,7 @@ export default function Nav() {
   return (
     <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
       <Link href="/" className="nav-logo" onClick={close}>
-        <Image src="/logo.png" alt="C&C Car & CPU Repair logo" width={32} height={32} style={{ objectFit: 'contain', borderRadius: 6 }} priority />
+        <Image src="/logo.png" alt="C&C Car & CPU Repair logo" width={26} height={26} style={{ objectFit: 'contain', borderRadius: 5 }} priority />
         C&amp;C Care
       </Link>
 

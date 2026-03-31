@@ -165,6 +165,43 @@
 .c-scroll-mouse span { width: 3px; height: 7px; background: var(--accent); border-radius: 2px; animation: scrollDown 1.6s ease-in-out infinite; }
 
 /* ==========================================
+   CAROUSEL SLIDE 1 — HORIZONTAL SPLIT
+   ========================================== */
+.c-split-content {
+  position: absolute; inset: 0; z-index: 4;
+  display: flex; align-items: center; justify-content: center;
+  gap: 4vw; padding: 0 6vw;
+}
+.c-split-logo {
+  flex: 0 0 auto;
+  width: clamp(200px, 30vw, 360px);
+  display: flex; align-items: center; justify-content: center;
+  filter: drop-shadow(0 0 40px rgba(59,130,246,.35));
+}
+.c-split-card {
+  flex: 1; max-width: 520px;
+  background: rgba(6,8,16,.78);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 20px;
+  padding: 2.5rem 2.75rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 24px 80px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.c-split-card .c-body {
+  position: static; opacity: 1; transform: none;
+  transition: none; max-width: 100%;
+}
+.c-split-card .c-actions {
+  position: static; opacity: 1; transform: none; transition: none;
+}
+
+@media (max-width: 768px) {
+  .c-split-content { flex-direction: column; padding: 80px 5vw 100px; gap: 1.5rem; }
+  .c-split-logo { width: clamp(140px, 50vw, 220px); }
+  .c-split-card { padding: 1.5rem; }
+}
+
+/* ==========================================
    TRUST BAR (infinite scroll marquee)
    ========================================== */
 .trust-bar {
