@@ -55,14 +55,16 @@
 /* Ghost button overrides inside dark overlays */
 .c-content .btn-ghost,
 .img-section-banner-overlay .btn-ghost,
-.cta-band .btn-ghost {
+.cta-band .btn-ghost,
+.svc-half-content .btn-ghost {
   color: #fff;
   background: rgba(255,255,255,.1);
   border-color: rgba(255,255,255,.3);
 }
 .c-content .btn-ghost:hover,
 .img-section-banner-overlay .btn-ghost:hover,
-.cta-band .btn-ghost:hover {
+.cta-band .btn-ghost:hover,
+.svc-half-content .btn-ghost:hover {
   background: rgba(255,255,255,.2);
   border-color: rgba(255,255,255,.5);
 }
@@ -449,7 +451,7 @@
 }
 .svc-half-content { position: relative; z-index: 2; }
 .svc-half-content .section-tag { margin-bottom: .75rem; }
-.svc-half-content h3 { font-family: var(--font-head); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .75rem; line-height: 1.15; }
+.svc-half-content h3 { font-family: var(--font-head); font-size: clamp(1.6rem,3vw,2.4rem); font-weight: 800; letter-spacing: -.03em; margin-bottom: .75rem; line-height: 1.15; color: #fff; }
 .svc-half-content p { color: rgba(241,245,249,.75); font-size: .92rem; line-height: 1.7; margin-bottom: 1.5rem; max-width: 380px; }
 .svc-half-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
 .svc-chip { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); color: rgba(241,245,249,.85); font-size: .75rem; padding: 4px 12px; border-radius: 100px; }
