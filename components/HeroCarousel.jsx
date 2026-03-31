@@ -16,7 +16,6 @@ const SLIDES = [
     href: '/contact',
     href2: '/services',
     accent: '#3b82f6',
-    localImg: true,
   },
   {
     id: 1,
@@ -77,22 +76,20 @@ export default function HeroCarousel() {
       {SLIDES.map((slide, i) => (
         <div key={slide.id} className={`c-slide${i === current ? ' active' : ''}`}>
 
-          {/* Photo — skip background image for slide 1 (uses split layout) */}
-          {!slide.localImg && (
-            <div className="c-img-wrap">
-              <Image
-                src={slide.img}
-                alt={slide.alt}
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className="c-img"
-              />
-            </div>
-          )}
+          {/* Photo */}
+          <div className="c-img-wrap">
+            <Image
+              src={slide.img}
+              alt={slide.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="c-img"
+            />
+          </div>
 
           {/* Dark gradient overlay */}
-          {!slide.localImg && <div className="c-overlay" />}
+          <div className="c-overlay" />
 
           {/* Accent color haze */}
           <div
@@ -101,59 +98,24 @@ export default function HeroCarousel() {
           />
 
           {/* Slide content */}
-          {slide.localImg ? (
-            /* ── Slide 1: horizontal logo-left / text-right layout ── */
-            <div className="c-split-content">
-              <div className="c-split-logo">
-                <Image
-                  src="/slide1.png"
-                  alt="C&C Car & CPU Repair"
-                  width={340}
-                  height={340}
-                  style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
-                  priority
-                />
-              </div>
-              <div className="c-split-card">
-                <div className="c-tag" style={{ marginBottom: '1.25rem' }}>
-                  <span className="c-tag-dot" />
-                  {slide.tag}
-                </div>
-                <h1 className="c-h1" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 3.2rem)', marginBottom: '1rem' }}>
-                  {slide.title.split('\n').map((line, j) => (
-                    <span key={j} className="c-h1-line" style={{ animationDelay: `${0.45 + j * 0.12}s` }}>
-                      {line}
-                    </span>
-                  ))}
-                </h1>
-                <p className="c-body" style={{ whiteSpace: 'pre-line', marginBottom: '1.75rem', opacity: 1, transform: 'none', transition: 'none' }}>{slide.body}</p>
-                <div className="c-actions" style={{ opacity: 1, transform: 'none', transition: 'none' }}>
-                  <Link href={slide.href} className="btn-primary">{slide.cta}</Link>
-                  <Link href={slide.href2} className="btn-ghost">{slide.cta2}</Link>
-                </div>
-              </div>
+          <div className="c-content">
+            <div className="c-tag">
+              <span className="c-tag-dot" />
+              {slide.tag}
             </div>
-          ) : (
-            /* ── Slides 2 & 3: standard bottom-left layout ── */
-            <div className="c-content">
-              <div className="c-tag">
-                <span className="c-tag-dot" />
-                {slide.tag}
-              </div>
-              <h1 className="c-h1">
-                {slide.title.split('\n').map((line, j) => (
-                  <span key={j} className="c-h1-line" style={{ animationDelay: `${0.45 + j * 0.12}s` }}>
-                    {line}
-                  </span>
-                ))}
-              </h1>
-              <p className="c-body" style={{ whiteSpace: 'pre-line' }}>{slide.body}</p>
-              <div className="c-actions">
-                <Link href={slide.href} className="btn-primary">{slide.cta}</Link>
-                <Link href={slide.href2} className="btn-ghost">{slide.cta2}</Link>
-              </div>
+            <h1 className="c-h1">
+              {slide.title.split('\n').map((line, j) => (
+                <span key={j} className="c-h1-line" style={{ animationDelay: `${0.45 + j * 0.12}s` }}>
+                  {line}
+                </span>
+              ))}
+            </h1>
+            <p className="c-body" style={{ whiteSpace: 'pre-line' }}>{slide.body}</p>
+            <div className="c-actions">
+              <Link href={slide.href} className="btn-primary">{slide.cta}</Link>
+              <Link href={slide.href2} className="btn-ghost">{slide.cta2}</Link>
             </div>
-          )}
+          </div>
         </div>
       ))}
 
